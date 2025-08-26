@@ -6,8 +6,8 @@ This project demonstrates how to create a **smooth scroll-driven frame-by-frame 
 <p align="center">
   <table align="center">
     <tr>
-      <td><img src="./video/gif_image.gif" width="470"></td>
-      <td><img src="./video/products.gif" width="470"></td> 
+      <td><img src="./video/gif_image.gif" width="400"></td>
+      <td><img src="./video/products.gif" width="400"></td> 
     </tr>
   </table>
 </p>
