@@ -1,4 +1,4 @@
-l#  Scroll-based Canvas Animation with GSAP and TailwindCSS
+#  Scroll-based Canvas Animation with GSAP and TailwindCSS
 
 This project demonstrates how to create a **smooth scroll-driven frame-by-frame animation** using HTML5 `<canvas>`, GSAP `ScrollTrigger`, and TailwindCSS for styling. Ideal for interactive storytelling, 3D animations, or showcasing high-quality frame sequences.
 
