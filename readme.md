@@ -3,10 +3,14 @@
 This project demonstrates how to create a **smooth scroll-driven frame-by-frame animation** using HTML5 `<canvas>`, GSAP `ScrollTrigger`, and TailwindCSS for styling. Ideal for interactive storytelling, 3D animations, or showcasing high-quality frame sequences.
 
 #  Demo Preview
- <p align="center">
-  <img src="./video/gif_image.gif" alt="Cover Image" width="610px" />
-  <img src="./video/products.gif" alt="Cover Image" width="610px"/>
- </p>
+<p align="center">
+  <table align="center">
+    <tr>
+      <td><img src="./video/gif_image.gif" width="470"></td>
+      <td><img src="./video/products.gif" width="470"></td> 
+    </tr>
+  </table>
+</p>
 
  ---
 
