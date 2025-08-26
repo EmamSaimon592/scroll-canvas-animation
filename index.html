@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imam®</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+
+<body>
+  <div class="w-full  bg-zinc-900">
+    <div class="parent relative top-0 left-0 w-full h-[700vh] ">
+      <div class=" w-full sticky top-0 left-0 h-screen ">
+        <canvas id="frame" class="w-full h-screen"></canvas>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"
+    integrity="sha512-f6bQMg6nkSRw/xfHw5BCbISe/dJjXrVGfz9BSDwhZtiErHwk7ifbmBEtF9vFW8UNIQPhV2uEFVyI/UHob9r7Cw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js"
+    integrity="sha512-AcqPGqrrAEtEwe+ADO5R8RbdFi7tuU7b/A2cJJH0Im0D18NRk5p5s4B3E5PMuO81KFw0ClN7J5SHVUJz7KOb0A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+  <script>
+    const canvas = document.querySelector("canvas");
+    const context = canvas.getContext("2d");
+
+    const frames = {
+      currentIndex: 0,
+      maxIndex: 96    //changeable
+    };
+
+    let imagesLoaded = 0;
+    let images = [];  //image store korar jonno 
+
+    function preloadImages() {
+      for (let i = 1; i <= frames.maxIndex; i++) {
+        const imageUrl = `./frames/frame_${i.toString().padStart(4, "0")}.jpeg`
+        const img = new Image();   //create a blank img tag <img>-----> mane holo amra 382 ta img tag banaichi.
+        img.src = imageUrl;    // input all imageUrl to the blank img tag. 
+
+        //now its time for ALL images loading...
+        img.onload = () => {
+          imagesLoaded++;    // let imagesLoaded = 0 theke  imagesLoaded++ (mane 382 porjonto jabe)
+          if (imagesLoaded === frames.maxIndex) {    // 382 ta images loading holo[maxIndex =382].
+            loadImage(frames.currentIndex);
+            startAnimation();
+          }
+        }
+        images.push(img);
+      }
+    }
+
+    function loadImage(index) {
+      if (index >= 0 && index <= frames.maxIndex) {
+        const img = images[index];
+
+        // write All math formula is here
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const scaleX = canvas.width / img.width;
+        const scaleY = canvas.height / img.height;
+        const scale = Math.max(scaleX, scaleY);
+
+        const newWidth = img.width * scale;
+        const newHeight = img.height * scale;
+
+        const offsetX = (canvas.width - newWidth) / 2;
+        const offsetY = (canvas.height - newHeight) / 2;
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.imageSmoothingEnabled = true;
+        context.imageSmoothingQuality = "high";
+        context.drawImage(img, offsetX, offsetY, newWidth, newHeight);
+        frames.currentIndex = index
+      }
+
+    }
+
+    function startAnimation() {
+      let tl = gsap.timeline({   // tl = timelines
+        scrollTrigger: {
+          trigger: ".parent",
+          start: "top top",
+          scrub: 2,
+          markers: false
+        }
+
+      })
+      tl.to(frames, {
+        currentIndex: frames.maxIndex,
+        onUpdate: function () {
+          loadImage(Math.floor(frames.currentIndex))
+        }
+      })
+    }
+
+
+    preloadImages();
+
+    // loadImage();
+
+
+
+
+
+  </script>
+
+
+</body>
+
+</html>
